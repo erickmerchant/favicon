@@ -6,7 +6,7 @@ const chalk = require('chalk')
 const Pnglib = require('pnglib')
 const path = require('path')
 const assert = require('assert')
-const hex_rgb = require('hex-rgb')
+const hexRGB = require('hex-rgb')
 const thenify = require('thenify')
 const mkdirp = thenify(require('mkdirp'))
 const fsWriteFile = thenify(require('fs').writeFile)
@@ -28,7 +28,7 @@ command.describe('Make a single color square favicon')
 
   assert.ok(length < 7 && length > 2, 'color should be like #aaa or #ffffff')
 
-  color = hex_rgb(color)
+  color = hexRGB(color)
 
   var img
   var directory = args.get('directory') ? args.get('directory') : process.cwd()

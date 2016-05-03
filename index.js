@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
-const command = require('sergeant').command()
+const command = require('sergeant/command')()
 const chalk = require('chalk')
 const Pnglib = require('pnglib')
 const path = require('path')

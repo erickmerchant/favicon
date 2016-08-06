@@ -10,16 +10,18 @@ const hexRGB = require('hex-rgb')
 const thenify = require('thenify')
 const mkdirp = thenify(require('mkdirp'))
 const fsWriteFile = thenify(require('fs').writeFile)
-const padding = 3
-const size = 16
 
 command.describe('Make a single color square favicon')
 .parameter('color', 'a color like #aaa or #ffffff')
+.parameter('padding', 'the padding (default: 3)')
+.parameter('size', 'the size (default: 16)')
 .parameter('directory', 'where to put it (optional)')
 .action(function (args) {
-  assert.notEqual(args.get('color'), null, 'color is required')
+  assert.notEqual(args.has('color'), false, 'color is required')
 
   var color = args.get('color')
+  var padding = args.has('padding') ? args.get('padding') : 3
+  var size = args.has('size') ? args.get('size') : 16
   var length = color.length
 
   if (color.startsWith('#')) {
@@ -31,7 +33,7 @@ command.describe('Make a single color square favicon')
   color = hexRGB(color)
 
   var img
-  var directory = args.get('directory') ? args.get('directory') : process.cwd()
+  var directory = args.has('directory') ? args.get('directory') : process.cwd()
 
   img = new Pnglib(size, size, 256)
 

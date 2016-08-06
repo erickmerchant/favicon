@@ -13,15 +13,15 @@ const fsWriteFile = thenify(require('fs').writeFile)
 
 command.describe('Make a single color square favicon')
 .parameter('color', 'a color like #aaa or #ffffff')
-.parameter('padding', 'the padding (default: 3)')
-.parameter('size', 'the size (default: 16)')
 .parameter('directory', 'where to put it (optional)')
+.option('padding', 'the padding (default: 3)')
+.option('size', 'the size (default: 16)')
 .action(function (args) {
   assert.notEqual(args.has('color'), false, 'color is required')
 
   var color = args.get('color')
-  var padding = args.has('padding') ? args.get('padding') : 3
-  var size = args.has('size') ? args.get('size') : 16
+  var padding = args.has('padding') ? parseInt(args.get('padding')) : 3
+  var size = args.has('size') ? parseInt(args.get('size')) : 16
   var length = color.length
 
   if (color.startsWith('#')) {

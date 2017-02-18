@@ -10,6 +10,10 @@
     "test": "standard && tape 'test.js' | faucet",
     "cover": "nyc --reporter=html npm test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erickmerchant/favicon.git"
+  },
   "keywords": [],
   "author": "Erick Merchant <erickmerchant@gmail.com>",
   "license": "ISC",

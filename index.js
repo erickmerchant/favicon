@@ -1,57 +1,53 @@
 #!/usr/bin/env node
 'use strict'
 
-const command = require('sergeant/command')()
-const chalk = require('chalk')
+const command = require('sergeant')
 const Pnglib = require('pnglib')
 const path = require('path')
-const assert = require('assert')
-const hexRGB = require('hex-rgb')
+const Color = require('hex-rgb')
 const thenify = require('thenify')
 const mkdirp = thenify(require('mkdirp'))
 const fsWriteFile = thenify(require('fs').writeFile)
 
-command.describe('Make a single color square favicon')
-.parameter('color', 'a color like #aaa or #ffffff')
-.parameter('directory', 'where to put it (optional)')
-.option('padding', 'the padding (default: 3)')
-.option('size', 'the size (default: 16)')
-.action(function (args) {
-  assert.notEqual(args.has('color'), false, 'color is required')
-
-  var color = args.get('color')
-  var padding = args.has('padding') ? parseInt(args.get('padding')) : 3
-  var size = args.has('size') ? parseInt(args.get('size')) : 16
-  var length = color.length
-
-  if (color.startsWith('#')) {
-    length -= 1
-  }
-
-  assert.ok(length < 7 && length > 2, 'color should be like #aaa or #ffffff')
-
-  color = hexRGB(color)
-
-  var img
-  var directory = args.has('directory') ? args.get('directory') : process.cwd()
-
-  img = new Pnglib(size, size, 256)
-
-  color.push(255)
-
-  img.color(0, 0, 0, 0)
-
-  for (let x = padding; x < size - padding; x++) {
-    for (let y = padding; y < size - padding; y++) {
-      img.buffer[img.index(x, y)] = img.color.apply(img, color)
-    }
-  }
-
-  return mkdirp(directory).then(function () {
-    return fsWriteFile(path.join(directory, 'favicon.png'), new Buffer(img.getBase64(), 'base64'))
+command('favicon', function ({option, parameter}) {
+  parameter('color', {
+    description: 'a color like #aaa or #ffffff',
+    type: Color,
+    required: true
   })
-})
 
-command.run().catch(function (err) {
-  console.error(chalk.red(err.message))
-})
+  parameter('directory', {
+    description: 'where to put it',
+    default: process.cwd()
+  })
+
+  option('padding', {
+    description: 'the padding',
+    type: Number,
+    default: 3
+  })
+
+  option('size', {
+    description: 'the size',
+    type: Number,
+    default: 16
+  })
+
+  return function (args) {
+    var img = new Pnglib(args.size, args.size, 256)
+
+    args.color.push(255)
+
+    img.color(0, 0, 0, 0)
+
+    for (let x = args.padding; x < args.size - args.padding; x++) {
+      for (let y = args.padding; y < args.size - args.padding; y++) {
+        img.buffer[img.index(x, y)] = img.color.apply(img, args.color)
+      }
+    }
+
+    return mkdirp(args.directory).then(function () {
+      return fsWriteFile(path.join(args.directory, 'favicon.png'), new Buffer(img.getBase64(), 'base64'))
+    })
+  }
+})(process.argv.slice(2))

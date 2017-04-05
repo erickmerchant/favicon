@@ -4,7 +4,7 @@
 const command = require('sergeant')
 const Pnglib = require('pnglib')
 const path = require('path')
-const Color = require('hex-rgb')
+const hexRGB = require('hex-rgb')
 const thenify = require('thenify')
 const mkdirp = thenify(require('mkdirp'))
 const fsWriteFile = thenify(require('fs').writeFile)
@@ -47,7 +47,11 @@ command('favicon', function ({option, parameter}) {
     }
 
     return mkdirp(args.directory).then(function () {
-      return fsWriteFile(path.join(args.directory, 'favicon.png'), new Buffer(img.getBase64(), 'base64'))
+      return fsWriteFile(path.join(args.directory, 'favicon.png'), Buffer.from(img.getBase64(), 'base64'))
     })
   }
 })(process.argv.slice(2))
+
+function Color (color) {
+  return hexRGB(color)
+}

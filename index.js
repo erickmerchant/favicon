@@ -7,7 +7,7 @@ const path = require('path')
 const hexRGB = require('hex-rgb')
 const thenify = require('thenify')
 const mkdirp = thenify(require('mkdirp'))
-const fsWriteFile = thenify(require('fs').writeFile)
+const writeFile = thenify(require('fs').writeFile)
 
 command('favicon', function ({option, parameter}) {
   parameter('color', {
@@ -47,7 +47,7 @@ command('favicon', function ({option, parameter}) {
     }
 
     return mkdirp(args.directory).then(function () {
-      return fsWriteFile(path.join(args.directory, 'favicon.png'), Buffer.from(img.getBase64(), 'base64'))
+      return writeFile(path.join(args.directory, 'favicon.png'), Buffer.from(img.getBase64(), 'base64'))
     })
   }
 })(process.argv.slice(2))

@@ -34,7 +34,7 @@ command('favicon', function ({option, parameter}) {
   })
 
   return function (args) {
-    var img = new Pnglib(args.size, args.size, 256)
+    const img = new Pnglib(args.size, args.size, 256)
 
     args.color.push(255)
 

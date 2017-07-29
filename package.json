@@ -1,6 +1,6 @@
 {
   "name": "@erickmerchant/favicon",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Make a single color square favicon",
   "bin": {
     "favicon": "./index.js"

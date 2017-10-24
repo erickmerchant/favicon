@@ -21,7 +21,7 @@
     "hex-rgb": "^1.0.0",
     "mkdirp": "^0.5.1",
     "pnglib": "0.0.1",
-    "sergeant": "^15.4.14",
+    "sergeant": "^15.4.15",
     "thenify": "^3.3.0"
   },
   "devDependencies": {

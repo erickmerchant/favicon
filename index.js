@@ -18,7 +18,7 @@ command('favicon', function ({option, parameter}) {
 
   parameter('directory', {
     description: 'where to put it',
-    default: process.cwd()
+    default: '.'
   })
 
   option('padding', {

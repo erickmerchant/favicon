@@ -18,19 +18,19 @@ command('favicon', function ({option, parameter}) {
 
   parameter('directory', {
     description: 'where to put it',
-    default: '.'
+    default: { value: '.' }
   })
 
   option('padding', {
     description: 'the padding',
     type: Number,
-    default: 3
+    default: { value: 3 }
   })
 
   option('size', {
     description: 'the size',
     type: Number,
-    default: 16
+    default: { value: 16 }
   })
 
   return function (args) {

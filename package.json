@@ -3,12 +3,11 @@
   "version": "2.3.0",
   "description": "Make a single color square favicon",
   "bin": {
-    "favicon": "./index.js"
+    "favicon": "./cli.js"
   },
   "main": "index.js",
   "scripts": {
-    "test": "standard && tape 'test.js' | faucet",
-    "cover": "nyc --reporter=html npm test"
+    "test": "standard && tape 'test.js'"
   },
   "repository": {
     "type": "git",
@@ -25,9 +24,6 @@
     "thenify": "^3.3.0"
   },
   "devDependencies": {
-    "faucet": "0.0.1",
-    "mockery": "^2.1.0",
-    "nyc": "^11.3.0",
     "standard": "^10.0.3",
     "tape": "^4.8.0"
   }

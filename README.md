@@ -2,18 +2,8 @@
 
 Make a simple single color square favicon.
 
-## Install
-
-Install it globally.
+## Usage
 
 ```
-npm install -g @erickmerchant/favicon
-```
-
-## Run
-
-Get help by running.
-
-```
-favicon --help
+npx @erickmerchant/favicon -h
 ```

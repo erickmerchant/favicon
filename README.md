@@ -1,4 +1,4 @@
-# favicon
+# @erickmerchant/favicon
 
 Make a simple single color square favicon.
 

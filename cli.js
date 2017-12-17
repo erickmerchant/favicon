@@ -2,36 +2,9 @@
 'use strict'
 
 const command = require('sergeant')
-const hexRGB = require('hex-rgb')
 const favicon = require('./index')
+const thenify = require('thenify')
+const mkdirp = thenify(require('mkdirp'))
+const writeFile = thenify(require('fs').writeFile)
 
-command('favicon', function ({option, parameter}) {
-  parameter('color', {
-    description: 'a color like #aaa or #ffffff',
-    type: Color,
-    required: true
-  })
-
-  parameter('directory', {
-    description: 'where to put it',
-    default: { value: '.' }
-  })
-
-  option('padding', {
-    description: 'the padding',
-    type: Number,
-    default: { value: 3 }
-  })
-
-  option('size', {
-    description: 'the size',
-    type: Number,
-    default: { value: 16 }
-  })
-
-  return favicon
-})(process.argv.slice(2))
-
-function Color (color) {
-  return hexRGB(color)
-}
+command('favicon', favicon({mkdirp, writeFile}))(process.argv.slice(2))

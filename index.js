@@ -40,7 +40,7 @@ module.exports = function (deps) {
         }
       }
 
-      return deps.mkdirp(args.directory).then(function () {
+      return deps.makeDir(args.directory).then(function () {
         return deps.writeFile(path.join(args.directory, 'favicon.png'), Buffer.from(img.getBase64(), 'base64'))
       })
     }

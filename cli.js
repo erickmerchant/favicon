@@ -7,4 +7,4 @@ const thenify = require('thenify')
 const mkdirp = thenify(require('mkdirp'))
 const writeFile = thenify(require('fs').writeFile)
 
-command('favicon', favicon({mkdirp, writeFile}))(process.argv.slice(2))
+command('favicon', favicon({makeDir: mkdirp, writeFile}))(process.argv.slice(2))

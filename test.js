@@ -4,7 +4,7 @@ const hexRGB = require('hex-rgb')
 const readFile = require('fs').readFile
 
 const noopDeps = {
-  mkdirp: () => { return Promise.resolve(true) },
+  makeDir: () => { return Promise.resolve(true) },
   writeFile: () => { return Promise.resolve(true) }
 }
 const noopDefiners = {
@@ -57,7 +57,7 @@ test('index.js - defaults', function (t) {
     t.error(err)
 
     require('./index')({
-      mkdirp (path) {
+      makeDir (path) {
         t.equal(path, './foo')
 
         return Promise.resolve(true)
@@ -85,7 +85,7 @@ test('index.js - size and padding', function (t) {
     t.error(err)
 
     require('./index')({
-      mkdirp (path) {
+      makeDir (path) {
         t.equal(path, './foo')
 
         return Promise.resolve(true)

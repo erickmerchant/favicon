@@ -1,8 +1,13 @@
 const Pnglib = require('pnglib')
 const Color = require('./color')
 const path = require('path')
+const assert = require('assert')
 
 module.exports = function (deps) {
+  assert.equal(typeof deps.makeDir, 'function')
+
+  assert.equal(typeof deps.writeFile, 'function')
+
   return function ({option, parameter}) {
     parameter('color', {
       description: 'a color like #aaa or #ffffff',

@@ -4,12 +4,12 @@ const hexRGB = require('hex-rgb')
 const readFile = require('fs').readFile
 
 const noopDeps = {
-  makeDir: () => { return Promise.resolve(true) },
-  writeFile: () => { return Promise.resolve(true) }
+  makeDir: () => Promise.resolve(true),
+  writeFile: () => Promise.resolve(true)
 }
 const noopDefiners = {
-  parameter: () => {},
-  option: () => {}
+  parameter () {},
+  option () {}
 }
 
 test('index.js - options and parameters', function (t) {
@@ -19,10 +19,10 @@ test('index.js - options and parameters', function (t) {
   const options = {}
 
   require('./index')(noopDeps)({
-    parameter: (name, args) => {
+    parameter (name, args) {
       parameters[name] = args
     },
-    option: (name, args) => {
+    option (name, args) {
       options[name] = args
     }
   })

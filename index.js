@@ -35,8 +35,6 @@ module.exports = function (deps) {
     return function (args) {
       const img = new Pnglib(args.size, args.size, 256)
 
-      args.color.push(255)
-
       img.color(0, 0, 0, 0)
 
       for (let x = args.padding; x < args.size - args.padding; x++) {

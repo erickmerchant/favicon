@@ -17,7 +17,7 @@
   "author": "Erick Merchant <erickmerchant@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "hex-rgb": "^1.0.0",
+    "hex-rgb": "^2.0.0",
     "mkdirp": "^0.5.1",
     "pnglib": "0.0.1",
     "sergeant": "^17.2.1",

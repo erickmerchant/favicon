@@ -1,7 +1,7 @@
 const test = require('tape')
 const execa = require('execa')
-const hexRGB = require('hex-rgb')
 const readFile = require('fs').readFile
+const Color = require('./color')
 
 const noopDeps = {
   makeDir: () => Promise.resolve(true),
@@ -73,7 +73,7 @@ test('index.js - defaults', function (t) {
       directory: './foo',
       size: 16,
       padding: 3,
-      color: [ 255, 128, 0 ]
+      color: Color('FF8000')
     })
   })
 })
@@ -101,7 +101,7 @@ test('index.js - size and padding', function (t) {
       directory: './foo',
       size: 32,
       padding: 0,
-      color: [ 255, 128, 0 ]
+      color: Color('FF8000')
     })
   })
 })
@@ -125,9 +125,7 @@ test('cli.js', async function (t) {
 test('color.js', async function (t) {
   t.plan(2)
 
-  const Color = require('./color')
+  t.deepEqual(Color('FF8000'), [ 255, 128, 0, 255 ])
 
-  t.deepEqual(Color('FF8000'), hexRGB('FF8000'))
-
-  t.deepEqual(Color('#FF8000'), hexRGB('#FF8000'))
+  t.deepEqual(Color('#FF8000'), [ 255, 128, 0, 255 ])
 })

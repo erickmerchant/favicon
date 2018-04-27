@@ -3,6 +3,14 @@ const Color = require('./color')
 const path = require('path')
 const assert = require('assert')
 
+function number (val) {
+  return Number(val)
+}
+
+function color (val) {
+  return Color(val)
+}
+
 module.exports = function (deps) {
   assert.equal(typeof deps.makeDir, 'function')
 
@@ -11,25 +19,25 @@ module.exports = function (deps) {
   return function ({option, parameter}) {
     parameter('color', {
       description: 'a color like #aaa or #ffffff',
-      type: Color,
+      type: color,
       required: true
     })
 
     parameter('directory', {
       description: 'where to put it',
-      default: { value: '.' }
+      default: '.'
     })
 
     option('padding', {
       description: 'the padding',
-      type: Number,
-      default: { value: 3 }
+      type: number,
+      default: 3
     })
 
     option('size', {
       description: 'the size',
-      type: Number,
-      default: { value: 16 }
+      type: number,
+      default: 16
     })
 
     return function (args) {

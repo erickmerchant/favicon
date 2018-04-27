@@ -31,23 +31,23 @@ test('index.js - options and parameters', function (t) {
 
   t.equal(parameters.color.required, true)
 
-  t.equal(parameters.color.type.name, 'Color')
+  t.equal(parameters.color.type.name, 'color')
 
   t.ok(parameters.directory)
 
-  t.equal(parameters.directory.default.value, '.')
+  t.equal(parameters.directory.default, '.')
 
   t.ok(options.size)
 
-  t.equal(options.size.default.value, 16)
+  t.equal(options.size.default, 16)
 
-  t.equal(options.size.type, Number)
+  t.equal(options.size.type.name, 'number')
 
   t.ok(options.padding)
 
-  t.equal(options.padding.default.value, 3)
+  t.equal(options.padding.default, 3)
 
-  t.equal(options.padding.type, Number)
+  t.equal(options.padding.type.name, 'number')
 })
 
 test('index.js - defaults', function (t) {

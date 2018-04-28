@@ -3,12 +3,16 @@ const Color = require('./color')
 const path = require('path')
 const assert = require('assert')
 
-function number (val) {
-  return Number(val)
+function numberFactory (_default) {
+  return function number (val) {
+    if (val == null) return _default
+
+    return Number(val)
+  }
 }
 
 function color (val) {
-  return Color(val)
+  return val != null ? Color(val) : null
 }
 
 module.exports = function (deps) {
@@ -25,19 +29,21 @@ module.exports = function (deps) {
 
     parameter('directory', {
       description: 'where to put it',
-      default: '.'
+      type: function (val) {
+        if (val == null) return '.'
+
+        return val
+      }
     })
 
     option('padding', {
       description: 'the padding',
-      type: number,
-      default: 3
+      type: numberFactory(3)
     })
 
     option('size', {
       description: 'the size',
-      type: number,
-      default: 16
+      type: numberFactory(16)
     })
 
     return function (args) {

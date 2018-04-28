@@ -13,7 +13,7 @@ const noopDefiners = {
 }
 
 test('index.js - options and parameters', function (t) {
-  t.plan(11)
+  t.plan(14)
 
   const parameters = {}
   const options = {}
@@ -35,19 +35,25 @@ test('index.js - options and parameters', function (t) {
 
   t.ok(parameters.directory)
 
-  t.equal(parameters.directory.default, '.')
+  t.equal(typeof parameters.directory.type, 'function')
+
+  t.equal(parameters.directory.type(), '.')
 
   t.ok(options.size)
 
-  t.equal(options.size.default, 16)
+  t.equal(typeof options.size.type, 'function')
 
   t.equal(options.size.type.name, 'number')
 
+  t.equal(options.size.type(), 16)
+
   t.ok(options.padding)
 
-  t.equal(options.padding.default, 3)
+  t.equal(typeof options.padding.type, 'function')
 
   t.equal(options.padding.type.name, 'number')
+
+  t.equal(options.padding.type(), 3)
 })
 
 test('index.js - defaults', function (t) {

@@ -29,7 +29,7 @@ module.exports = function (deps) {
 
     parameter('directory', {
       description: 'where to put it',
-      type: function (val) {
+      type: function directory (val) {
         if (val == null) return '.'
 
         return val

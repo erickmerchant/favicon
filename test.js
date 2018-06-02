@@ -4,8 +4,8 @@ const readFile = require('fs').readFile
 const Color = require('./color')
 
 const noopDeps = {
-  makeDir: () => Promise.resolve(true),
-  writeFile: () => Promise.resolve(true)
+  makeDir () { return Promise.resolve(true) },
+  writeFile () { return Promise.resolve(true) }
 }
 const noopDefiners = {
   parameter () {},

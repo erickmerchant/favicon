@@ -3,59 +3,6 @@ const execa = require('execa')
 const readFile = require('fs').readFile
 const Color = require('./color')
 
-const noopDeps = {
-  makeDir () { return Promise.resolve(true) },
-  writeFile () { return Promise.resolve(true) }
-}
-const noopDefiners = {
-  parameter () {},
-  option () {}
-}
-
-test('index.js - options and parameters', function (t) {
-  t.plan(14)
-
-  const parameters = {}
-  const options = {}
-
-  require('./index')(noopDeps)({
-    parameter (name, args) {
-      parameters[name] = args
-    },
-    option (name, args) {
-      options[name] = args
-    }
-  })
-
-  t.ok(parameters.color)
-
-  t.equal(parameters.color.required, true)
-
-  t.equal(parameters.color.type.name, 'color')
-
-  t.ok(parameters.directory)
-
-  t.equal(typeof parameters.directory.type, 'function')
-
-  t.equal(parameters.directory.type(), '.')
-
-  t.ok(options.size)
-
-  t.equal(typeof options.size.type, 'function')
-
-  t.equal(options.size.type.name, 'number')
-
-  t.equal(options.size.type(), 16)
-
-  t.ok(options.padding)
-
-  t.equal(typeof options.padding.type, 'function')
-
-  t.equal(options.padding.type.name, 'number')
-
-  t.equal(options.padding.type(), 3)
-})
-
 test('index.js - defaults', function (t) {
   t.plan(4)
 
@@ -75,7 +22,7 @@ test('index.js - defaults', function (t) {
 
         return Promise.resolve(true)
       }
-    })(noopDefiners)({
+    })({
       directory: './foo',
       size: 16,
       padding: 3,
@@ -103,7 +50,7 @@ test('index.js - size and padding', function (t) {
 
         return Promise.resolve(true)
       }
-    })(noopDefiners)({
+    })({
       directory: './foo',
       size: 32,
       padding: 0,

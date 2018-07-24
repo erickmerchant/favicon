@@ -20,7 +20,7 @@
     "hex-rgb": "^3.0.0",
     "make-dir": "^1.3.0",
     "pnglib": "0.0.1",
-    "sergeant": "^21.0.0"
+    "sergeant": "^22.0.0"
   },
   "devDependencies": {
     "execa": "^0.10.0",

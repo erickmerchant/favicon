@@ -8,7 +8,7 @@ const makeDir = require('make-dir')
 const promisify = require('util').promisify
 const writeFile = promisify(require('fs').writeFile)
 
-command('favicon', ({parameter, option}) => {
+command('favicon', ({ parameter, option }) => {
   parameter('color', {
     description: 'a color like #aaa or #ffffff',
     type (val) {
@@ -38,5 +38,5 @@ command('favicon', ({parameter, option}) => {
     }
   })
 
-  return (args) => favicon({makeDir, writeFile})(args)
+  return (args) => favicon({ makeDir, writeFile })(args)
 })(process.argv.slice(2))

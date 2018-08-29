@@ -3,9 +3,9 @@ const path = require('path')
 const assert = require('assert')
 
 module.exports = function (deps) {
-  assert.equal(typeof deps.makeDir, 'function')
+  assert.strictEqual(typeof deps.makeDir, 'function')
 
-  assert.equal(typeof deps.writeFile, 'function')
+  assert.strictEqual(typeof deps.writeFile, 'function')
 
   return function (args) {
     const img = new Pnglib(args.size, args.size, 256)

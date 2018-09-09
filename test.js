@@ -3,24 +3,24 @@ const execa = require('execa')
 const readFile = require('fs').readFile
 const Color = require('./color')
 
-test('index.js - defaults', function (t) {
+test('index.js - defaults', (t) => {
   t.plan(4)
 
-  readFile('./fixtures/defaults/favicon.png', function (err, fixture) {
+  readFile('./fixtures/defaults/favicon.png', (err, fixture) => {
     t.error(err)
 
     require('./index')({
-      makeDir (path) {
+      async makeDir (path) {
         t.equal(path, './foo')
 
-        return Promise.resolve(true)
+        return true
       },
-      writeFile (path, buffer) {
+      async writeFile (path, buffer) {
         t.equal(path, 'foo/favicon.png')
 
         t.ok(buffer.equals(fixture))
 
-        return Promise.resolve(true)
+        return true
       }
     })({
       directory: './foo',
@@ -31,24 +31,24 @@ test('index.js - defaults', function (t) {
   })
 })
 
-test('index.js - size and padding', function (t) {
+test('index.js - size and padding', (t) => {
   t.plan(4)
 
-  readFile('./fixtures/size-and-padding/favicon.png', function (err, fixture) {
+  readFile('./fixtures/size-and-padding/favicon.png', (err, fixture) => {
     t.error(err)
 
     require('./index')({
-      makeDir (path) {
+      async makeDir (path) {
         t.equal(path, './foo')
 
-        return Promise.resolve(true)
+        return true
       },
-      writeFile (path, buffer) {
+      async writeFile (path, buffer) {
         t.equal(path, 'foo/favicon.png')
 
         t.ok(buffer.equals(fixture))
 
-        return Promise.resolve(true)
+        return true
       }
     })({
       directory: './foo',
@@ -59,7 +59,7 @@ test('index.js - size and padding', function (t) {
   })
 })
 
-test('cli.js', async function (t) {
+test('cli.js', async (t) => {
   t.plan(4)
 
   try {
@@ -75,7 +75,7 @@ test('cli.js', async function (t) {
   }
 })
 
-test('color.js', async function (t) {
+test('color.js', async (t) => {
   t.plan(2)
 
   t.deepEqual(Color('FF8000'), [ 255, 128, 0, 255 ])

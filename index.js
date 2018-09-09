@@ -2,12 +2,12 @@ const Pnglib = require('pnglib')
 const path = require('path')
 const assert = require('assert')
 
-module.exports = function (deps) {
+module.exports = (deps) => {
   assert.strictEqual(typeof deps.makeDir, 'function')
 
   assert.strictEqual(typeof deps.writeFile, 'function')
 
-  return function (args) {
+  return async (args) => {
     const img = new Pnglib(args.size, args.size, 256)
 
     img.color(0, 0, 0, 0)
@@ -18,8 +18,8 @@ module.exports = function (deps) {
       }
     }
 
-    return deps.makeDir(args.directory).then(function () {
-      return deps.writeFile(path.join(args.directory, 'favicon.png'), Buffer.from(img.getBase64(), 'base64'))
-    })
+    await deps.makeDir(args.directory)
+
+    return deps.writeFile(path.join(args.directory, 'favicon.png'), Buffer.from(img.getBase64(), 'base64'))
   }
 }

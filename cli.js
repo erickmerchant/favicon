@@ -5,8 +5,8 @@ const favicon = require('./index')
 const Color = require('./color')
 const command = require('sergeant')
 const makeDir = require('make-dir')
-const promisify = require('util').promisify
-const writeFile = promisify(require('fs').writeFile)
+const createWriteStream = require('fs').createWriteStream
+const streamPromise = require('stream-to-promise')
 
 command('favicon', ({ parameter, option }) => {
   parameter('color', {
@@ -38,5 +38,10 @@ command('favicon', ({ parameter, option }) => {
     }
   })
 
-  return (args) => favicon({ makeDir, writeFile })(args)
+  return (args) => favicon({
+    makeDir,
+    writeFile () {
+      return streamPromise(createWriteStream(...arguments))
+    }
+  })(args)
 })(process.argv.slice(2))

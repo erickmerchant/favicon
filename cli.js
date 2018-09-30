@@ -40,8 +40,12 @@ command('favicon', ({ parameter, option }) => {
 
   return (args) => favicon({
     makeDir,
-    writeFile () {
-      return streamPromise(createWriteStream(...arguments))
+    writeFile (path, content) {
+      const stream = createWriteStream(path)
+
+      stream.end(content)
+
+      return streamPromise(stream)
     }
   })(args)
 })(process.argv.slice(2))

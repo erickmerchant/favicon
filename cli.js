@@ -3,13 +3,14 @@
 
 const favicon = require('./index')
 const Color = require('./color')
-const command = require('sergeant')
+const { command, start } = require('sergeant')('favicon')
 const makeDir = require('make-dir')
 const createWriteStream = require('fs').createWriteStream
 const streamPromise = require('stream-to-promise')
 
-command('favicon', ({ parameter, option }) => {
-  parameter('color', {
+command(({ parameter, option }) => {
+  parameter({
+    name: 'color',
     description: 'a color like #aaa or #ffffff',
     type (val) {
       return val != null ? Color(val) : null
@@ -17,21 +18,24 @@ command('favicon', ({ parameter, option }) => {
     required: true
   })
 
-  parameter('directory', {
+  parameter({
+    name: 'directory',
     description: 'where to put it',
     type (val = '.') {
       return val
     }
   })
 
-  option('padding', {
+  option({
+    name: 'padding',
     description: 'the padding',
     type (val = 3) {
       return Number(val)
     }
   })
 
-  option('size', {
+  option({
+    name: 'size',
     description: 'the size',
     type (val = 16) {
       return Number(val)
@@ -48,4 +52,6 @@ command('favicon', ({ parameter, option }) => {
       return streamPromise(stream)
     }
   })(args)
-})(process.argv.slice(2))
+})
+
+start(process.argv.slice(2))

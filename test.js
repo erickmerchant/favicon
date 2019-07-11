@@ -78,7 +78,7 @@ test('cli.js', async (t) => {
 test('color.js', async (t) => {
   t.plan(2)
 
-  t.deepEqual(Color('FF8000'), [ 255, 128, 0 ])
+  t.deepEqual(Color('FF8000'), [255, 128, 0])
 
-  t.deepEqual(Color('#FF8000'), [ 255, 128, 0 ])
+  t.deepEqual(Color('#FF8000'), [255, 128, 0])
 })

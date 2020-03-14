@@ -24,9 +24,9 @@ test('index.js - defaults', (t) => {
       }
     })({
       directory: './foo',
-      size: 16,
-      padding: 3,
-      color: Color('FF8000')
+      size: '16',
+      padding: '3',
+      color: '#FF8000'
     })
   })
 })
@@ -52,15 +52,15 @@ test('index.js - size and padding', (t) => {
       }
     })({
       directory: './foo',
-      size: 32,
-      padding: 0,
-      color: Color('FF8000')
+      size: '32',
+      padding: '0',
+      color: '#FF8000'
     })
   })
 })
 
 test('cli.js', async (t) => {
-  t.plan(4)
+  t.plan(3)
 
   try {
     await execa('node', ['./cli.js', '-h'])
@@ -70,8 +70,6 @@ test('cli.js', async (t) => {
     t.equal(e.stdout.includes('Usage'), true)
 
     t.equal(e.stdout.includes('Options'), true)
-
-    t.equal(e.stdout.includes('Parameters'), true)
   }
 })
 
